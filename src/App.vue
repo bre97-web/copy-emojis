@@ -12,6 +12,7 @@
       <md-branded-fab lowered class="fixed right-8 bottom-8" label="Go Top" @click="goTop">
         <md-icon slot="icon">arrow_upward</md-icon>
       </md-branded-fab>
+      <EventSnackbar></EventSnackbar>
     </nav>
 
     <footer>
@@ -22,6 +23,7 @@
 
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
+import EventSnackbar from './components/EventSnackbar.vue';
 
 const goTop = async () => {
 
@@ -43,7 +45,6 @@ const goTop = async () => {
     obj.step += 0.5
   }
 }
-
 
 </script>
 
