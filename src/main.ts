@@ -16,18 +16,21 @@ import '@/assets/index.css'
  * Google's Material Design
  */
 import 'material-symbols/outlined.css'
-import '@fontsource/roboto/unicode.json'
-
+import '@fontsource/roboto'
+import "@fontsource/noto-emoji"
 /**
  * Pinia
  */
 import { createPinia } from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { createPersistedState } from 'pinia-plugin-persistedstate'
 
 const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
+pinia.use(createPersistedState({
+    auto: true,
+}))
 
 const app = createApp(App)
 app.use(pinia).use(Router).mount('#app')
 
 app.config.performance = true
+

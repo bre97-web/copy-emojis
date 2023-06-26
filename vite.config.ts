@@ -10,7 +10,17 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  plugins: [vue(), vueJsx()],
+  plugins: [vue({
+    template: {
+        compilerOptions: {
+            isCustomElement: (tag: string): boolean =>
+                tag.startsWith("md")
+        },
+    },
+  }), vueJsx({
+    isCustomElement: (tag: string): boolean =>
+        tag.startsWith("md-") || tag.startsWith("lit"),
+  })],
   root: './',
   publicDir: 'public',
   assetsInclude: '',

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/noto-emoji": "^5.0.3",
     "@fontsource/roboto": "^5.0.3",
     "@headlessui/vue": "^1.7.14",
     "@material/web": "^1.0.0-pre.11",
