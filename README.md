@@ -19,4 +19,4 @@ We will continue to provide new features for this project in the follow-up time,
 
 |Function Name|Progress|
 |:--|--:|
-|Search|❌|
+|Search|✅|
