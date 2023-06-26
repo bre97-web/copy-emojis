@@ -51,6 +51,8 @@ const useEmojiStore = defineStore('emoji_store', () => {
                 types.value.push(title)
             })
             emojis.value = map
+            console.log(emojis.value);
+            
         }
 
         onMounted(() => {
