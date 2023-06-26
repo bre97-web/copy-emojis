@@ -1,6 +1,6 @@
 <template>
   <div class="background noScrollY">
-    <Header class="fixed top-0 right-0 z-50 w-full backdrop-blur-xl"></Header>
+    <Header class="fixed top-0 right-0 z-50 w-full"></Header>
 
     <main class="py-28 px-8 container min-h-screen mx-auto">
       <router-view v-slot="{ Component }">
