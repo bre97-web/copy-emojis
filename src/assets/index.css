@@ -4,9 +4,7 @@
 @tailwind variants;
 
 @layer base {
-    ::-webkit-scrollbar {
-        /* display: none; */
-    }
+
     body {
         @apply overflow-x-scroll;
     }
@@ -99,9 +97,15 @@
         background-color: var(--md-sys-color-background);
         color: var(--md-sys-color-on-background);
     }
+    .bg-onBackground {
+        background-color: var(--md-sys-color-on-background);
+    }
     .surface {
         background-color: var(--md-sys-color-surface);
         color: var(--md-sys-color-on-surface);
+    }
+    .onSurface {
+        background-color: var(--md-sys-color-on-surface);
     }
     .text-primary {
         color: var(--md-sys-color-primary);
@@ -129,7 +133,6 @@
         --md-elevation-level: 0;
     }
 
-    
 }
 @layer utilities {
     

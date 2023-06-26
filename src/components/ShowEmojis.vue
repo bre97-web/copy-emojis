@@ -1,44 +1,21 @@
 <template>
     <div class="space-y-16">
-        <md-chip-set type="filter">
-            <md-filter-chip v-for="e in types" :label="e" @click="pushCurrentType(e)"></md-filter-chip>
-        </md-chip-set>
+        <EmojiChipSet :types="types" :push-current-type="pushCurrentType"></EmojiChipSet>
 
         <div>
-            <template v-if="currentTypes.length <= 1">
-                <ul class="flex flex-wrap flex-col md:flex-row gap-4">
-                    <li 
-                        v-for="(e, index) in filter"
-                        :key="index"
-                        class="w-full md:flex-1 md:flex-grow md:w-auto mx-auto items-stretch text-center p-4 space-y-4 border rounded-xl surface elevation"
-                        data-state="reverse"
-                    >
-                        <md-elevation></md-elevation>
-                        <h1 class="text-8xl lg:text-9xl">{{ e.emoji }}</h1>
-                        <p class="text-xs">{{ e.name }}</p>
-                    </li>
-                </ul>
-            </template>
-            <template v-else>
-                <ul class="space-y-8">
+            <EmojiSet :row="!isSingleType">
+                <template v-if="isSingleType">
+                    <EmojiCard v-for="(e, index) in filter" :key="index" :emoji="e"></EmojiCard>
+                </template>
+                <template v-else>
                     <li v-for="(title, index) in currentTypes" :key="index" class="flex flex-col gap-4">
                         <h1 class="font-bold text-4xl text-primary">{{ title }}</h1>
                         <ul class="flex flex-row items-stretch gap-4 overflow-x-scroll pl-2 py-4">
-                            <li
-                                v-for="(e, index) in singleFilter(title)"
-                                :key="index"
-                                class="p-4 space-y-4 border rounded-xl text-center surface elevation"
-                                data-state="reverse"
-                            >
-                                <md-elevation></md-elevation>
-                                
-                                <h1 class="text-8xl lg:text-9xl">{{ e.emoji }}</h1>
-                                <p class="text-xs text-secondary">{{ e.name }}</p>
-                            </li>
+                            <EmojiCard v-for="(e, index) in singleFilter(title)" :key="index" :emoji="e"></EmojiCard>
                         </ul>
                     </li>
-                </ul>
-            </template>
+                </template>
+            </EmojiSet>
         </div>
 
         <nav class="flex items-center justify-end">
@@ -48,37 +25,42 @@
 </template>
 
 <script setup lang="ts">
-import { Emoji, useEmojiStore } from '@/store/useEmojiStore';
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { Emoji, useEmojiStore } from '@/store/useEmojiStore'
+import { computed, ref } from 'vue'
+import EmojiCard from './EmojiCard.vue'
+import EmojiChipSet from './EmojiChipSet.vue'
+import EmojiSet from './EmojiSet.vue'
+
 
 const emojiStore = useEmojiStore()
 
 /**
  * chip-set 过滤器
  */
-const types = computed(() => emojiStore.getTypes)
+const types = computed(() => emojiStore.getTypes().value)
 const currentTypes = ref<string[]>([])
 const pushCurrentType = (type: string) => {
-    if(currentTypes.value.includes(type)) {
+    if (currentTypes.value.includes(type)) {
         currentTypes.value.splice(currentTypes.value.indexOf(type), 1)
     } else {
         currentTypes.value.push(type)
     }
 }
+const isSingleType = computed<boolean>(() => currentTypes.value.length <= 1)
 
 const filter = computed<Emoji[]>(() => {
     let emojis: Emoji[] = []
     if (currentTypes.value.length === 0) {
-        emojiStore.getEmojis.forEach(e => emojis.push(...e))
-    } else if (emojiStore.getEmojis.has(currentTypes.value[0])) {
-        emojis.push(...emojiStore.getEmojis.get(currentTypes.value[0]) as Emoji[])
+        emojiStore.getEmojis().value.forEach(e => emojis.push(...e))
+    } else if (emojiStore.getEmojis().value.has(currentTypes.value[0])) {
+        emojis.push(...emojiStore.getEmojis().value.get(currentTypes.value[0]) as Emoji[])
     }
     return emojis.splice(0, currentMaxIndex.value)
 })
 const singleFilter = (type: string) => {
     let emojis: Emoji[] = []
-    if (emojiStore.getEmojis.has(type)) {
-        emojis.push(...emojiStore.getEmojis.get(type) as Emoji[])
+    if (emojiStore.getEmojis().value.has(type)) {
+        emojis.push(...emojiStore.getEmojis().value.get(type) as Emoji[])
     }
     return emojis.splice(0, currentMaxIndex.value)
 }
@@ -91,10 +73,6 @@ const currentMaxIndex = ref(50)
 const increase = () => {
     currentMaxIndex.value = currentMaxIndex.value + 25
 }
-
-onMounted(() => {
-    emojiStore.initEmoji() 
-})
 </script>
 
 <style scoped></style>
