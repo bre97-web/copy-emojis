@@ -4,7 +4,6 @@
 @tailwind variants;
 
 @layer base {
-
     body {
         @apply overflow-x-scroll;
     }
@@ -107,11 +106,22 @@
     .onSurface {
         background-color: var(--md-sys-color-on-surface);
     }
-    .text-primary {
-        color: var(--md-sys-color-primary);
+    .onPrimary {
+        color: var(--md-sys-color-on-primary);
     }
-    .text-secondary {
-        color: var(--md-sys-color-secondary);
+    .onSecondary {
+        color: var(--md-sys-color-on-secondary);
+    }
+    .primary {
+        background-color: var(--md-sys-color-primary);
+    }
+    .secondary {
+        background-color: var(--md-sys-color-secondary);
+    }
+
+    .focus {
+        position: relative;
+        --md-focus-ring-shape: 8px;
     }
     .elevation {
         position: relative;

@@ -1,9 +1,7 @@
 <template>
     <div>
         <main>
-            <EmojiSet :row="false">
-                <EmojiCard v-for="e in favorite.getFavorites" :emoji="e"></EmojiCard>
-            </EmojiSet>
+            <ShowFavoriteEmojis></ShowFavoriteEmojis>
             <template v-if="favorite.getFavorites.length === 0">
                 <div class="text-center space-y-4">
                     <h1 class="text-9xl">👀</h1>
@@ -15,9 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import EmojiSet from '@/components/EmojiSet.vue';
-import EmojiCard from '@/components/EmojiCard.vue';
 import { useFavoriteStore } from '@/store/useFavoriteStore'
+import ShowFavoriteEmojis from '@/components/ShowFavoriteEmojis.vue'
 
 const favorite = useFavoriteStore()
 </script>

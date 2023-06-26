@@ -1,5 +1,5 @@
 <template>
-    <header class="shadow px-2 flex justify-between items-center">
+    <header class="backdrop-blur-lg px-2 py-1 flex justify-between items-center">
         <Title></Title>
 
         <nav class="space-x-2 flex justify-stretch">
@@ -20,12 +20,12 @@ import DarkSwitch from './DarkSwitch.vue'
 
 const Title = () => (
     <section class="flex flex-col">
-        <h1 class="font-bold text-primary">Copy Emojis!</h1>
-        <p class="text-primary ">Preview</p>
+        <h1 class="font-bold text-[--md-sys-color-on-inverse-primary]">Copy Emojis!</h1>
+        <p class="text-[--md-sys-color-on-inverse-secondary]">Preview</p>
     </section>
 )
 const Button = ({ label }: { label: string}) => (
-    <button data-state="reverse" class="hover:bg-black/5 rounded-md px-4 py-2">
+    <button data-state="reverse" class="text-[--md-sys-color-on-inverse-primary] hover:bg-black/5 rounded-md px-4 py-2">
         <md-elevation></md-elevation>
         { label }
     </button>
