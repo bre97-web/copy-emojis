@@ -16,8 +16,7 @@ import '@/assets/index.css'
  * Google's Material Design
  */
 import 'material-symbols/outlined.css'
-import '@fontsource/roboto'
-import "@fontsource/noto-emoji"
+
 /**
  * Pinia
  */
